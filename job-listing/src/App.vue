@@ -34,4 +34,10 @@ export default{
     background-color: hsl(180, 29%, 50%);
     
  }
+ main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
 </style>

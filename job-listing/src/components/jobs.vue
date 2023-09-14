@@ -5,8 +5,8 @@
         
         <div class="company">
             <p class="company-p">{{ dataJobs.company }}</p>
-            <p>{{ dataJobs.new }}</p>
-            <p>{{ dataJobs.featured }}</p>
+            <p v-if="dataJobs.new" class="new">New!</p>
+            <p v-if="dataJobs.featured " class="feature">Feature</p>
         </div>
         
         <div class="level">
@@ -17,6 +17,7 @@
             <p>{{ dataJobs.contract }}</p>
             <p>{{ dataJobs.location }}</p>
         </div>
+        
 
         </div>
 
@@ -25,10 +26,15 @@
             <p>{{ dataJobs.role }}</p>
             <p>{{ dataJobs.level }}</p>
         </div>
-        <div class="tools" v-for="job in dataJobs.languages" :key="dataJobs.id"> 
-            <p>{{ job }}</p>
-            <p v-for="job in dataJobs.tools" :key="dataJobs.id">{{ job }}</p>   
+        <div class="language" v-for="language in dataJobs.languages" :key="dataJobs.id"> 
+            <p>{{ language }}</p>
         </div>
+
+        <div class="tools">
+            <p v-for="tool in dataJobs.tools" :key="dataJobs.id">
+                {{ tool }}
+            </p>
+        </div>   
 
     </div>
 </div>
@@ -55,6 +61,11 @@
     padding: 20px;
     font-family:'League Spartan', sans-serif;
     box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.199);
+    border-left: 4px solid transparent;
+
+}
+.container:hover{
+    border-left: 4px solid hsl(180, 29%, 50%);
 }
 .info-job{
     margin-left: 20px;
@@ -63,13 +74,29 @@
 .company{
     display: flex;
     margin-bottom: 10px;
+    align-items: center;
 }
 .company p{
     margin-left: 10px;
+    padding: 
 }
 .company-p{
     font-weight: bold;
     color: hsl(180, 29%, 50%);
+}
+.new{
+    background-color: hsl(180, 29%, 50%);
+    color: white;
+    padding: 8px 10px;
+    border-radius: 30px;
+    font-weight: bold;
+}
+.feature{
+    background-color: hsl(180, 14%, 20%);
+    color: white;
+    padding: 8px 10px;
+    border-radius: 30px;
+    font-weight: bold;
 }
 .level{
     margin-bottom: 10px;
@@ -78,6 +105,10 @@
     margin-left: 10px;
     font-weight: bold;
     font-size: large;
+}
+.level p:hover{
+    color: hsl(180, 29%, 50%);
+    cursor: pointer;
 }
 .time{
     display: flex;
@@ -97,7 +128,13 @@
     position: absolute;
     right: 0;
     margin-right: 15px;
-    top: 40%;
+    top: 35%;
+}
+.tags p:hover{
+    background-color: hsl(180, 29%, 50%);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
 }
 .area{
     display: flex;
@@ -106,13 +143,22 @@
 }
 .area p{
     margin-left: 15px;
+    padding: 6px;
 }
-.tools{
+.language{
     display: flex;
     
 }
+.language p{
+    margin-left: 15px;
+    padding: 6px;
+}
+.tools{
+    display: flex;
+}
 .tools p{
     margin-left: 15px;
+    padding: 6px;
 }
 
 </style>

@@ -1,6 +1,7 @@
 <template>
   <header></header>
   <main>
+    
     <jobs v-for="job in data" :key="job.id" :dataJobs="job">
         
     </jobs>
@@ -9,7 +10,7 @@
 
 <script>
 import jobs from './components/jobs.vue'
-import data from './assets/data.json'
+import data from './static/data.json'
 export default{
     components:{
         jobs

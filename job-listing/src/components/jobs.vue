@@ -23,15 +23,15 @@
 
     <div class="tags">
         <div class="area">
-            <p>{{ dataJobs.role }}</p>
-            <p>{{ dataJobs.level }}</p>
+            <p @click="tagName(dataJobs.role)">{{ dataJobs.role }}</p>
+            <p @click="tagName(dataJobs.level)">{{ dataJobs.level }}</p>
         </div>
         <div class="language" v-for="language in dataJobs.languages" :key="dataJobs.id"> 
-            <p>{{ language }}</p>
+            <p @click="tagName(language)">{{ language }}</p>
         </div>
 
         <div class="tools">
-            <p v-for="tool in dataJobs.tools" :key="dataJobs.id">
+            <p v-for="tool in dataJobs.tools" :key="dataJobs.id" @click="tagName(tool)">
                 {{ tool }}
             </p>
         </div>   
@@ -42,7 +42,13 @@
 
 <script>
     export default{
-        props: ['dataJobs']
+        props: ['dataJobs'],
+        methods:{
+            tagName(value){
+                this.$emit('tagsName', value);
+                
+            }
+        }
     }
 
 </script>

@@ -7,7 +7,7 @@
       </span>
       <button class="clear" @click="deleteAllTags">Clear</button>
     </div>
-    <jobs v-for="job in data" :key="job.id" :dataJobs="job" @tagsName="tagsToFilter">
+    <jobs v-for="job in filteredData" :key="job.id" :dataJobs="job" @tagsName="tagsToFilter">
         
     </jobs>
   </main>
@@ -23,19 +23,39 @@ export default{
     data(){
         return{
             data: data,
-            tags: []
+            tags: [],
+            
         }
+    },
+    computed:{
+      filteredData(){
+        if (this.tags.length === 0){
+          return this.data
+        }else{
+          return this.data.filter((job) => {
+          return this.tags.every((tag) =>{
+            return(
+              job.role.includes(tag) ||
+              job.level.includes(tag) ||
+              job.languages.includes(tag) ||
+              job.tools.includes(tag)
+            )
+          })
+        })
+        }
+        
+      }
     },
     methods:{
       tagsToFilter(value){
-        this.tags.push(value)
-        console.log(this.tags)
+        this.tags.push(value);
+        
       },
       deleteTag(index){
-        this.tags.splice(index, 1)
+        this.tags.splice(index, 1);
       },
       deleteAllTags(){
-        this.tags.splice(0, this.tags.length)
+        this.tags.splice(0, this.tags.length);
       }
     }
 }
@@ -48,7 +68,7 @@ export default{
     box-sizing: border-box;
  }
  header{
-    background-image: url('./assets/images/bg-header-desktop.svg');
+    background-image: url('./static/images/bg-header-desktop.svg');
     height: 20vh;
     background-color: hsl(180, 29%, 50%);
     
